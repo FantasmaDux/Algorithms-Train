@@ -19,7 +19,7 @@ public class Task3 {
             char c = s.charAt(rightPointer);
 
             if (hashAlphabet.containsKey(c)) {
-                leftPointer = Math.max(leftPointer, hashAlphabet.get(c) + 1);
+                leftPointer = Math.max(leftPointer, hashAlphabet.get(c) + 1); // чтобы leftPointer никогда не сдвигался влево
             }
 
             hashAlphabet.put(c, rightPointer);
