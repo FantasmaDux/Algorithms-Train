@@ -25,7 +25,7 @@ public class Task424 {
             }
 
             windowLen = rightPointer - leftPointer + 1;
-            if (windowLen - maxFreqSym > k) {
+            if (windowLen - maxFreqSym > k) { // сколько символов не равны самому часто встречающемуся
                 map.put(s.charAt(leftPointer), map.get(s.charAt(leftPointer)) - 1);
                 leftPointer++;
             }
