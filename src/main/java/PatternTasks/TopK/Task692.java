@@ -11,27 +11,25 @@ public class Task692 {
 
     public static List<String> topKFrequent(String[] words, int k) {
 
-        final Map<String, Integer> wordFreq = new HashMap<>();
+        final HashMap<String, Integer> freqWords = new HashMap<>();
 
-        for (String word : words) {
-            wordFreq.put(word, wordFreq.getOrDefault(word, 0) + 1);
+        for (String s : words) {
+            freqWords.put(s, freqWords.getOrDefault(s, 0) +1);
         }
 
-        PriorityQueue<Map.Entry<String, Integer>> pq =
-                new PriorityQueue<>(
-                        Comparator
-                                .comparing(Map.Entry<String, Integer>::getValue).reversed()
-                                .thenComparing(Map.Entry<String, Integer>::getKey)
-                );
+        PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(
+                (a, b) -> a.getValue() == b.getValue() ?
+                        a.getKey().compareTo(b.getKey()) : b.getValue() - a.getValue()
+        );
 
-        pq.addAll(wordFreq.entrySet());
-
-        List<String> res = new ArrayList<>();
-
-        for (int i = 0; i < k && !pq.isEmpty(); i++) {
-            res.add(pq.poll().getKey());
+        for (Map.Entry<String, Integer> entry : freqWords.entrySet()) {
+            pq.add(entry);
         }
 
-        return res;
+        List<String> ans = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            ans.add(pq.poll().getKey());
+        }
+        return ans;
     }
 }
